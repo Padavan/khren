@@ -7,7 +7,11 @@ python2.7
 tkinter
 
 ##Todo
-*kak delat' checkboksi, poconi?
+~~*kak delat' checkboksi, poconi?~~
+*classes
+*files and folders
+*preference
+
 
 ##Usage
 run gui.py in console.
