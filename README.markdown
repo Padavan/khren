@@ -8,7 +8,7 @@ python2.7
 tkinter
 
 ##Todo
-~~-	kak delat' checkboksi, poconi?~~
+-~~	kak delat' checkboksi, poconi?~~
 -	classes
 -	files and folders
 -	preference
@@ -20,5 +20,5 @@ msi installer is planned
 
 ##Changes
 - 	**0.1**
-	--	hello world + help page
+  -		hello world + help page
 
