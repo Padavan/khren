@@ -1,8 +1,5 @@
-.. -*- restructuredtext -*-
+#Name of app in development
 
-=============
-Name of app in development
-=============
 workname is khren, but its sucks
 
 ##Requirements
