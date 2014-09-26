@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# __author__ = 'dmitry'
 
 from Tkinter import *
 import webbrowser
