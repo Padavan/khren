@@ -2,6 +2,8 @@
 
 from Tkinter import *
 import webbrowser
+import time
+import threading
 
 class App(object):
     def __init__(self, root):
@@ -21,8 +23,9 @@ class App(object):
         helpmenu.add_command(label="About Khren", command=self.about)
         self.root.config(menu=self.menu)
 #----------------------------------------------------------------------------
-        timelabel=Label(root, text="00:00:00", font="Segoe 48")
-        timelabel.pack()
+        self.timelabel=Label(root, text="00:00", font="Segoe 48")
+        self.timelabel.pack()
+        self.update_timer()
 
         separator = Frame(height=2, bd=4, relief=SUNKEN)
         separator.pack(fill=X, padx=0, pady=0)
@@ -71,6 +74,11 @@ class App(object):
         lic.config(state=DISABLED)
         scrollbar.config(command=lic.yview)
 
+    def update_timer(self):
+        now = time.strftime("%M:%S")
+        self.timelabel.configure(text=now)
+        self.root.after(1000, self.update_timer)
+
     def dummy(self):
         print "dummy fun"
 
@@ -80,7 +88,19 @@ class App(object):
     def quit(self):
         self.root.destroy()
 
-
+class Timer(threading.Thread):
+    def __init__(self):
+        threading.Thread.__init__(self)
+        self.event = threading.Event()
+        self.minutes=25
+        self.count=self.minutes*60
+    def start(self):
+        self.count-=1
+        self.event.wait(1)
+    def stop(self):
+        self.event.set()
+    def dumb(self):
+        return self.count
 
 if __name__ == "__main__":
     root = Tk()
