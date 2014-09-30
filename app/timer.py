@@ -11,7 +11,7 @@ class Timer(object):
         while self.count > 0:
             self.count-=1
             time.sleep(1)
-            print self.is_state
+            #print self.is_state
             if self.is_state:
                 break
     def stop(self):

@@ -14,8 +14,6 @@ class App(object):
         self.menu.add_cascade(label="File", underline=0, menu=filemenu)
         filemenu.add_command(label="Start", command=self.dummy)
         filemenu.add_command(label="Stop", command=self.dummy)
-        #filemenu.add_command(label="About", command=self.about)
-        #filemenu.add_command(label="About", command=self.aboutWindowInit)
         filemenu.add_command(label="Exit", underline=1, command=self.quit)
         helpmenu = Menu(self.menu, tearoff=0)
         self.menu.add_cascade(label="Help",menu=helpmenu)
@@ -51,7 +49,7 @@ class App(object):
 
     def update_timer(self):
         now=self.tmr.dumb()
-        print "update", now
+        #print "update", now
         now2="%02d:%02d" % divmod(now, 60)
         self.timelabel.configure(text=now2)
         self.root.after(1000, self.update_timer)
