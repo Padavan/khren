@@ -2,8 +2,8 @@
 
 from Tkinter import *
 import webbrowser
-import time
 import threading
+from timer import Timer
 
 class App(object):
     def __init__(self, root):
@@ -33,12 +33,19 @@ class App(object):
         separator.pack(fill=X, padx=0, pady=0)
 
         #TODO make only one button
-        startButton = Button(root, text="Start",command=threading.Thread(target=self.tmr.start).start,state=ACTIVE)
-        stopButton = Button(root, text="Stop", command=self.dummy,state=DISABLED)
-        startButton.pack()
-        stopButton.pack()
-#----------------------------------------------------------------------------
+        self.startButton = Button(root, text="Start",command=self.toggle,state=ACTIVE)
+        self.startButton.pack()
 
+        self.timer=threading.Thread(target=self.tmr.start)
+#----------------------------------------------------------------------------
+    def toggle(self):
+        if self.startButton["text"]=="Start":
+            self.startButton.config(text="Stop")
+            w=threading.Thread(target=self.tmr.start)
+            w.start()
+        else:
+            self.startButton.config(text="Start")
+            self.tmr.stop()
 
     def about(self):
         # TODO Make frame not window
@@ -78,8 +85,9 @@ class App(object):
 
     def update_timer(self):
         now=self.tmr.dumb()
-        print now
-        self.timelabel.configure(text=now)
+        print "update", now
+        now2="%02d:%02d" % divmod(now, 60)
+        self.timelabel.configure(text=now2)
         self.root.after(1000, self.update_timer)
 
     def dummy(self):
@@ -90,22 +98,6 @@ class App(object):
 
     def quit(self):
         self.root.destroy()
-
-class Timer(threading.Thread):
-    def __init__(self):
-        #threading.Thread.__init__(self)
-        self.event = threading.Event()
-        self.minutes=5
-        self.count=self.minutes*1
-        self.is_state=False
-    def start(self):
-        while self.count > 0:
-            self.count-=1
-            self.event.wait(1)
-    def stop(self):
-        self.event.set()
-    def dumb(self):
-        return self.count
 
 if __name__ == "__main__":
     root = Tk()
