@@ -23,15 +23,17 @@ class App(object):
         helpmenu.add_command(label="About Khren", command=self.about)
         self.root.config(menu=self.menu)
 #----------------------------------------------------------------------------
+        self.tmr=Timer()
         self.timelabel=Label(root, text="00:00", font="Segoe 48")
         self.timelabel.pack()
         self.update_timer()
+
 
         separator = Frame(height=2, bd=4, relief=SUNKEN)
         separator.pack(fill=X, padx=0, pady=0)
 
         #TODO make only one button
-        startButton = Button(root, text="Start",command=self.dummy,state=ACTIVE)
+        startButton = Button(root, text="Start",command=threading.Thread(target=self.tmr.start).start,state=ACTIVE)
         stopButton = Button(root, text="Stop", command=self.dummy,state=DISABLED)
         startButton.pack()
         stopButton.pack()
@@ -75,7 +77,8 @@ class App(object):
         scrollbar.config(command=lic.yview)
 
     def update_timer(self):
-        now = time.strftime("%M:%S")
+        now=self.tmr.dumb()
+        print now
         self.timelabel.configure(text=now)
         self.root.after(1000, self.update_timer)
 
@@ -90,13 +93,15 @@ class App(object):
 
 class Timer(threading.Thread):
     def __init__(self):
-        threading.Thread.__init__(self)
+        #threading.Thread.__init__(self)
         self.event = threading.Event()
-        self.minutes=25
-        self.count=self.minutes*60
+        self.minutes=5
+        self.count=self.minutes*1
+        self.is_state=False
     def start(self):
-        self.count-=1
-        self.event.wait(1)
+        while self.count > 0:
+            self.count-=1
+            self.event.wait(1)
     def stop(self):
         self.event.set()
     def dumb(self):
