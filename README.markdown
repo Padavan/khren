@@ -21,8 +21,8 @@ tkinter
 -   pomodoro time boxing
 -   systray
 -   statistics
--   BEAUTIFUL icons and fonts and clocks and stuff
--
+-   beautiful icons and fonts and clocks and stuff
+
 
 
 ##Usage
