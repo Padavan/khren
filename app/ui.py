@@ -1,13 +1,19 @@
 #!/usr/bin/env python
 
 from Tkinter import *
+from ttk import *
 import threading
 from timer import Timer
 from about import AboutWindow
 
 class App(object):
     def __init__(self, root):
+        s=Style()
+        s.theme_use('clam')
+
         self.root = root
+        self.root.title("Khren")
+
 #---------------------------------------------------------------------
         self.menu = Menu(self.root)
         filemenu = Menu(self.menu, tearoff=False)
@@ -15,10 +21,15 @@ class App(object):
         filemenu.add_command(label="Start", command=self.dummy)
         filemenu.add_command(label="Stop", command=self.dummy)
         filemenu.add_command(label="Exit", underline=1, command=self.dummy)
+
+        self.editmenu = Menu(self.menu, tearoff=0)
+        self.menu.add_cascade(label="Edit",menu=self.editmenu)
+        self.editmenu.add_command(label="Preference")
+
         helpmenu = Menu(self.menu, tearoff=0)
         self.menu.add_cascade(label="Help",menu=helpmenu)
         helpmenu.add_command(label="Donate")
-        helpmenu.add_separator()
+        #helpmenu.add_separator()
         helpmenu.add_command(label="About Khren", command=self.aboutWindowInit)
         self.root.config(menu=self.menu)
 #----------------------------------------------------------------------------
@@ -28,7 +39,7 @@ class App(object):
         self.update_timer()
 
 
-        separator = Frame(height=2, bd=4, relief=SUNKEN)
+        separator = Frame(height=2, relief=SUNKEN)
         separator.pack(fill=X, padx=0, pady=0)
 
         #TODO make only one button

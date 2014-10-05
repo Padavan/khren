@@ -23,9 +23,11 @@ class App(object):
         self.makewidget()
 
     def makewidget(self):
-
-        root.minsize(700,500)
+        s=Style()
+        s.theme_use('clam')
+        root.minsize(550,500)
         root.title("Preferences")
+
         title=Frame(root)
         title.pack(fill=X, side=TOP)
         photo=PhotoImage(file='image/marisa_small.gif')
@@ -49,26 +51,28 @@ class App(object):
 
         subt1 = Label(self.f1, text="Time").grid(row=0,pady=2, sticky=W)
 
-        subsub1=Label(self.f1, text="Duration").grid(row=1, padx=50, sticky=W)
-        self.scale1 = Scale(self.f1, from_=1, to=100,length=500)
-        self.scale1.grid(row=2, padx=50, pady=5,sticky=W+E)
+        subsub1=Label(self.f1, text="Duration").grid(row=1, padx=50, sticky=E)
+        self.scale1 = Scale(self.f1, from_=1, to=100,length=300)
+        self.scale1.grid(row=1, column=1, pady=5,sticky=W+E)
         self.scale1.set(25)
         self.valuedisplay1=Label(self.f1, text=self.scale1.get())
-        self.valuedisplay1.grid(row=2, column=1, sticky=W)
+        self.valuedisplay1.grid(row=1, padx=10, column=2, sticky=W)
 
-        subsub2=Label(self.f1, text="Break").grid(row=3, padx=50, pady=5, sticky=W)
-        self.scale2 = Scale(self.f1, from_=1, to=100,length=500)
-        self.scale2.grid(row=4, padx=50,pady=5, sticky=W+E)
+        subsub2=Label(self.f1, text="Break").grid(row=2, padx=50, pady=5, sticky=E)
+        self.scale2 = Scale(self.f1, from_=1, to=100,length=300)
+        self.scale2.grid(row=2,column=1, pady=5, sticky=W+E)
         self.scale2.set(5)
         self.valuedisplay2=Label(self.f1, text=self.scale2.get())
-        self.valuedisplay2.grid(row=5, column=1, sticky=W)
+        self.valuedisplay2.grid(row=2,padx=10, column=2, sticky=W)
 
-        subsub3=Label(self.f1, text="Long Break").grid(row=6, padx=50, sticky=W)
-        self.scale3 = Scale(self.f1, from_=1, to=100,length=500)
-        self.scale3.grid(row=7, padx=50, pady=5, sticky=W+E)
+        subsub3=Label(self.f1, text="Long Break").grid(row=3, padx=50, sticky=E)
+        self.scale3 = Scale(self.f1, from_=1, to=100,length=300)
+        self.scale3.grid(row=3, column=1, pady=5, sticky=W+E)
         self.scale3.set(15)
         self.valuedisplay3=Label(self.f1, text=self.scale3.get())
-        self.valuedisplay3.grid(row=8, column=1, sticky=W)
+        self.valuedisplay3.grid(row=3, padx=10, column=2, sticky=W)
+
+
 
         self.update_values()
 

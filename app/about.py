@@ -1,4 +1,5 @@
 from Tkinter import *
+from ttk import *
 import webbrowser
 
 __author__ = 'Dmitry Shihaleev'
@@ -20,8 +21,8 @@ class AboutWindow(object):
         window.maxsize(400,400)
         one=Frame(window)
         one.pack(fill=X, side=TOP)
-        photo=PhotoImage(file='image/marisa.gif')
-        icon = Label(one, width=80, height=80, image=photo)
+        photo=PhotoImage(file='image/marisa_small.gif')
+        icon = Label(one, width=80, image=photo)
         icon.photo=photo
         icon.pack(side=LEFT)
         msg = Label(one, text=__appname__).pack(pady=30,padx=30,side=LEFT)
@@ -31,11 +32,11 @@ class AboutWindow(object):
         homepage = Label(two, text="Home page:")
         homepage.pack(side=LEFT)
 
-        homelink = Label(two, text=__url__, fg="blue")
+        homelink = Label(two, text=__url__)
         homelink.pack(padx=40,pady=5, side=LEFT)
         homelink.bind("<Button-1>",lambda aurl=__url__:self.openurl(__url__))
 
-        group = LabelFrame(window, text="The MIT License", padx=5, pady=5)
+        group = LabelFrame(window, text="The MIT License")
         group.pack(padx=10, pady=10)
         scrollbar = Scrollbar(group)
         scrollbar.pack(side=RIGHT, fill=Y)
